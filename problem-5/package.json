@@ -1,0 +1,31 @@
+{
+    "name": "problem-5",
+    "private": true,
+    "type": "module",
+    "devDependencies": {
+        "@types/compression": "^1.8.1",
+        "@types/cors": "^2.8.19",
+        "@types/morgan": "^1.9.10",
+        "prisma": "^6.16.1",
+        "tsx": "^4.20.5"
+    },
+    "peerDependencies": {
+        "typescript": "^5"
+    },
+    "dependencies": {
+        "@prisma/client": "^6.16.1",
+        "@types/express": "^5.0.3",
+        "compression": "^1.8.1",
+        "cors": "^2.8.5",
+        "express": "^5.1.0",
+        "helmet": "^8.1.0",
+        "morgan": "^1.10.1"
+    },
+    "scripts": {
+        "dev": "pnpm exec tsx watch src/index.ts",
+        "build": "tsc -p tsconfig.json",
+        "start": "node dist/index.js",
+        "prisma:migrate": "prisma migrate dev --name init",
+        "prisma:generate": "prisma generate"
+    }
+}

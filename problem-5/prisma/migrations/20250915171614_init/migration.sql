@@ -1,0 +1,9 @@
+-- CreateTable
+CREATE TABLE "Plan" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "budget" REAL NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'DRAFT',
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
+);
