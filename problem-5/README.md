@@ -181,4 +181,4 @@ README.md
 * By default, SQLite is used for simplicity.
   Replace the datasource in `schema.prisma` for Postgres/MySQL if needed.
 * When running in CI/CD, run smoke tests with Newman after deploying the server.
-* Use `pnpm prisma migrate dev` whenever you change the schema.
+* Use `pnpm prisma migrate dev` whenever we want to change the schema.
