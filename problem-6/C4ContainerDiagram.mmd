@@ -1,0 +1,21 @@
+C4Container
+    title Container Diagram: Scoreboard Backend
+
+    Person(user, "User", "Interacts via frontend")
+    System(web, "Website / Frontend", "Shows Top 10 scoreboard")
+
+    System_Boundary(api, "Backend API Service") {
+        Container(apiSvc, "Express API", "Node/Express", "Exposes REST/WS endpoints")
+        Container(service, "Score Service", "TypeScript", "Business logic for score updates")
+        ContainerDb(db, "Database", "SQLite/Postgres", "Stores users and scores")
+        Container(cache, "Redis Cache", "Redis", "Caches Top 10 scores")
+        Container(ws, "WebSocket Gateway", "Express/WS", "Pushes live scoreboard updates")
+    }
+
+    Rel(user, web, "Uses")
+    Rel(web, apiSvc, "REST: PATCH /api/users/{id}/score, GET /api/scores/top")
+    Rel(apiSvc, service, "Calls business logic")
+    Rel(service, db, "Read/Write scores")
+    Rel(service, cache, "Update Top 10")
+    Rel(service, ws, "Publish scoreboardUpdated events")
+    Rel(apiSvc, ws, "Expose WebSocket /ws/scores")
