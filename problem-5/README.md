@@ -170,7 +170,8 @@ src/
 prisma/
   schema.prisma
 
-PlanAPI.postman_collection.json
+smoke-tests/
+  PlanAPI.postman_collection.json
 README.md
 ```
 
