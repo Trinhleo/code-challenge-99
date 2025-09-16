@@ -27,7 +27,7 @@ export const planService = {
         const [items, total] = await Promise.all([
             prisma.plan.findMany({
                 where,
-                orderBy: { id: "asc" },
+                orderBy: { createdAt: "desc" },
                 skip,
                 take,
             }),
