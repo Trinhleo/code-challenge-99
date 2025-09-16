@@ -15,7 +15,7 @@ export async function createPlan(req: Request, res: Response) {
 
 
 export async function listPlans(req: Request, res: Response) {
-    const { status, name } = req.query as { status?: string; name?: string };
+    const { status, name, page, pageSize } = req.query as { status?: string; name?: string, page?: number; pageSize?: number };
     const plans = await planService.list({ status, name });
     return res.json(plans);
 }

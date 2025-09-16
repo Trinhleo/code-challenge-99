@@ -5,6 +5,8 @@ import type { PlanUpdateInput } from "../types/plan.js";
 export interface PlanFilters {
     status?: string;
     name?: string;
+    page?: number;
+    pageSize?: number;
 }
 
 export const planService = {
@@ -13,20 +15,34 @@ export const planService = {
     },
 
     async list(filters: PlanFilters) {
-        const { status, name } = filters;
+        const { status, name, page = 1, pageSize = 10 } = filters;
 
         const where: Prisma.PlanWhereInput = {};
-        if (status) {
-            where.status = status;
-        }
-        if (name) {
-            where.name = { contains: name };
-        }
+        if (status) where.status = status;
+        if (name) where.name = { contains: name };
 
-        return prisma.plan.findMany({
-            where,
-            orderBy: { id: "asc" },
-        });
+        const skip = (page - 1) * pageSize;
+        const take = pageSize;
+
+        const [items, total] = await Promise.all([
+            prisma.plan.findMany({
+                where,
+                orderBy: { id: "asc" },
+                skip,
+                take,
+            }),
+            prisma.plan.count({ where }),
+        ]);
+
+        return {
+            data: items,
+            meta: {
+                total,
+                page,
+                pageSize,
+                totalPages: Math.ceil(total / pageSize),
+            },
+        };
     },
 
     async getById(id: number) {

@@ -5,6 +5,7 @@ import morgan from "morgan";
 import compression from "compression";
 
 import api from "./routes/index.js";
+import { setupSwagger } from "./lib/swagger.js";
 
 export const app = express();
 
@@ -26,3 +27,6 @@ app.use((err: any, _req: any, res: any, _next: any) => {
     console.error(err);
     res.status(500).json({ message: "Internal Server Error" });
 });
+
+// Swagger docs
+setupSwagger(app);
