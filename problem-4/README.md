@@ -30,4 +30,3 @@
 	```
 
 The result will display the execution time of each function in the console.
-# code-challenge-99

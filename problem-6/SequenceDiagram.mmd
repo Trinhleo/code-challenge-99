@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant Client
+    participant API as Backend API (Express)
+    participant DB as Database
+    participant Cache as Redis Cache
+    participant WS as WebSocket Channel
+
+    Client->>API: PATCH /api/users/{id}/score { actionId, JWT }
+    API->>API: Validate JWT + check actionId (no replay)
+    API->>DB: Increment user score
+    API->>Cache: Update Top 10 leaderboard
+    API->>WS: Broadcast "scoreboardUpdated" with Top 10
+    WS-->>Client: Push updated Top 10
+    Client->>API: GET /api/scores/top
+    API->>Cache: Fetch Top 10
+    API-->>Client: Return Top 10 scores

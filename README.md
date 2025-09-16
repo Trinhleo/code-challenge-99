@@ -1,6 +1,6 @@
 # Code Challenge 99
 
-This repository contains multiple coding problems, each organized in its own folder (e.g., `problem-4`, `problem-5`, `problem-6`).
+This repository contains multiple coding problems, each organized in its own folder (`problem-4`, `problem-5`, `problem-6`).
 
 ## How to Run Each Problem
 
